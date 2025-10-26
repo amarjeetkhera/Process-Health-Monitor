@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from datetime import datetime, timedelta
 
 REQUIRED_COLUMNS = ["case_id", "activity", "timestamp"]
 OPTIONAL_COLUMNS = ["resource", "cost"]
@@ -26,7 +25,7 @@ def generate_demo_data(n_cases: int = 500, seed: int= 42) -> pd.DataFrame:
         ("Invoice", 0.5, 2.0),
         ("Pay", 0.3, 1.5),
     ]
-    base_date = pd.Timestamp(datetime.now()) - pd.Timedelta(days=60)
+    base_date = pd.Timestamp.now() - pd.Timedelta(days=60)
     rows = []
     for i in range(n_cases):
         case = f"C{i:05d}"
