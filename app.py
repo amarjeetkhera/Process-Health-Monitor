@@ -2,6 +2,7 @@ import os
 import json
 import streamlit as st
 import matplotlib.pyplot as plt
+import pandas as pd
 from phm.data_io import load_csv, generate_demo_data, REQUIRED_COLUMNS
 from phm.metrics import compute_kpis, step_durations
 from phm.discovery import detect_bottlenecks
@@ -29,9 +30,22 @@ with st.sidebar:
 
 
     st.header("Filters")
-    date_from = st.date_input("From date", value=None)
-    date_to = st.date_input("To date", value=None)
+
+    # Use a single range selector instead of two separate dates
+    date_range = st.date_input("Date range (optional)", value=None)
+
+    def _normalize_date_range(val):
+        """Return (start_date, end_date) or (None, None)."""
+        if val is None:
+            return None, None
+        if isinstance(val, (tuple, list)):
+            start, end = val
+            return start or None, end or None
+        return val, None
+
+    start_date, end_date = _normalize_date_range(date_range)
     res_filter = st.text_input("Resource contains (optional)")
+
 
 try:
     if uploaded is not None:
@@ -46,13 +60,13 @@ except Exception as e:
     st.stop()
 
 # Apply filters
-import pandas as pd
-if date_from:
-    df = df[df["timestamp"].dt.date >= pd.to_datetime(date_from).date()]
-if date_to:
-    df = df[df["timestamp"].dt.date <= pd.to_datetime(date_to).date()]
+if start_date is not None:
+    df = df[df["timestamp"].dt.date >= start_date]
+if end_date is not None:
+    df = df[df["timestamp"].dt.date <= end_date]
 if res_filter and "resource" in df.columns:
     df = df[df["resource"].astype(str).str.contains(res_filter, case=False, na=False)]
+
 
 
 if df.empty:
