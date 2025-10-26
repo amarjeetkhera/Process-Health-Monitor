@@ -56,7 +56,7 @@ try:
         st.info("Upload your CSV or click 'Generate demo data' in the sidebar.")
         st.stop()
 except Exception as e:
-    st.error(f"Failed to load data: {e}")
+    st.exception(e)
     st.stop()
 
 # Apply filters
