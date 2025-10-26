@@ -21,7 +21,7 @@ def generate_demo_data(n_cases: int = 500, seed: int= 42) -> pd.DataFrame:
     assert hasattr(pd, "Timestamp"), "pandas was shadowed"
     rng = np.random.default_rng(seed)
     activities = [
-        ("Receive Order", 0.2, 1.0)
+        ("Receive Order", 0.2, 1.0),
         ("Validate", 0.5, 2.0),
         ("Approve", 0.8, 3.5),
         ("Fulfill", 1.0, 6.0),
