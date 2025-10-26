@@ -16,6 +16,9 @@ def load_csv(file) -> pd.DataFrame:
     return df.sort_values(["case_id", "timestamp"]).reset_index(drop=True)
 
 def generate_demo_data(n_cases: int = 500, seed: int= 42) -> pd.DataFrame:
+    # sanity guards
+    assert callable(int), "int was shadowed somewhere"
+    assert hasattr(pd, "Timestamp"), "pandas was shadowed"
     rng = np.random.default_rng(seed)
     activities = [
         ("Receive Order", 0.2, 1.0)
