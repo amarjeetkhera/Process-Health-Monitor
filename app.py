@@ -127,18 +127,6 @@ if stats["occurrences"].median() < 50:
 st.markdown("".join(rule_suggestions) if rule_suggestions else "No obvious issues detected.")
 
 
-# Optional LLM narrative hook
-use_llm = st.checkbox("Enhance with AI narrative (requires LLM_API_KEY in env)")
-if use_llm and os.getenv("LLM_API_KEY"):
-    narrative = (
-        "Based on detected bottlenecks, prioritizing the top two steps is likely to reduce end-to-end cycle time by 8–15%. "
-        "Automating approval routing and pre-validation can further decrease rework rates."
-    )
-    st.success(narrative)
-elif use_llm:
-    st.info("Set LLM_API_KEY to enable AI narrative.")
-
-
 # Exports
 st.subheader("Export")
 kpis_json = json.dumps({k: (v.tolist() if hasattr(v, 'tolist') else v) for k, v in kpis.items()}, default=str, indent=2)
