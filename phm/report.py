@@ -10,7 +10,7 @@ def make_pdf_report(kpis: dict, step_stats: pd.DataFrame, bottlenecks: pd.DataFr
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
     pdf.set_font("Arial", "B", 16)
-    pdf.cell(0, 10, "Process Health Monitor – Executive Summary", ln=1)
+    pdf.cell(0, 10, "Process Health Monitor Executive Summary", ln=1)
     pdf.set_font("Arial", size=12)
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     pdf.cell(0, 8, f"Generated: {now}", ln=1)
