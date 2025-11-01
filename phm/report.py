@@ -1,25 +1,30 @@
 from fpdf import FPDF
 from datetime import datetime
 import pandas as pd
+import os
 
-
-
+# Point to your Unicode font
+FONT_PATH = os.path.join(os.path.dirname(__file__), "..", "assets", "DejaVuSans.ttf")
 
 def make_pdf_report(kpis: dict, step_stats: pd.DataFrame, bottlenecks: pd.DataFrame) -> bytes:
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
-    pdf.set_font("Arial", "B", 16)
+
+    # Register and use Unicode font
+    pdf.add_font("DejaVu", "", FONT_PATH, uni=True)
+    pdf.set_font("DejaVu", "", 16)
     pdf.cell(0, 10, "Process Health Monitor Executive Summary", ln=1)
-    pdf.set_font("Arial", size=12)
+
+    pdf.set_font("DejaVu", "", 12)
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     pdf.cell(0, 8, f"Generated: {now}", ln=1)
 
-
     pdf.ln(4)
-    pdf.set_font("Arial", "B", 14)
+    pdf.set_font("DejaVu", "", 14)
     pdf.cell(0, 8, "Key KPIs", ln=1)
-    pdf.set_font("Arial", size=12)
+
+    pdf.set_font("DejaVu", "", 12)
     lines = [
         f"Total cases: {kpis.get('total_cases', 0)}",
         f"Avg throughput: {kpis.get('avg_throughput_h', 0.0):.2f} h",
@@ -29,16 +34,17 @@ def make_pdf_report(kpis: dict, step_stats: pd.DataFrame, bottlenecks: pd.DataFr
     for ln in lines:
         pdf.cell(0, 8, ln, ln=1)
 
-
     pdf.ln(4)
-    pdf.set_font("Arial", "B", 14)
+    pdf.set_font("DejaVu", "", 14)
     pdf.cell(0, 8, "Top Bottlenecks", ln=1)
-    pdf.set_font("Arial", size=11)
+    pdf.set_font("DejaVu", "", 11)
+
     hdr = ["Activity", "Mean h", "Median h", "N", "Bottleneck"]
     colw = [65, 25, 25, 20, 30]
     for w, h in zip(colw, hdr):
         pdf.cell(w, 8, h, border=1)
     pdf.ln(8)
+
     for _, r in bottlenecks.head(12).iterrows():
         cells = [
             str(r.get("activity", ""))[:36],
@@ -51,6 +57,5 @@ def make_pdf_report(kpis: dict, step_stats: pd.DataFrame, bottlenecks: pd.DataFr
             pdf.cell(w, 8, c, border=1)
         pdf.ln(8)
 
-
-    out = pdf.output(dest='S')
-    return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode('latin-1', 'replace')
+    # fpdf2 returns bytes directly — no encoding
+    return pdf.output(dest="S")
