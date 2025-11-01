@@ -52,4 +52,5 @@ def make_pdf_report(kpis: dict, step_stats: pd.DataFrame, bottlenecks: pd.DataFr
         pdf.ln(8)
 
 
-    return pdf.output(dest='S').encode('latin-1')
+    out = pdf.output(dest='S')
+    return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode('latin-1', 'replace')
