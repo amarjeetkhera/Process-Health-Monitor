@@ -134,5 +134,3 @@ st.download_button("Download KPIs (JSON)", kpis_json, file_name="kpis.json", mim
 st.download_button("Download bottlenecks (CSV)", bnecks.to_csv(index=False).encode("utf-8"), file_name="bottlenecks.csv", mime="text/csv")
 pdf_bytes = make_pdf_report(kpis, stats, bnecks)
 st.download_button("Download Executive PDF", data=pdf_bytes, file_name="process_health_summary.pdf", mime="application/pdf")
-
-st.caption("Developed by Amarjeet Khera")
