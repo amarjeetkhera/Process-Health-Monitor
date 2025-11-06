@@ -135,4 +135,4 @@ st.download_button("Download bottlenecks (CSV)", bnecks.to_csv(index=False).enco
 pdf_bytes = make_pdf_report(kpis, stats, bnecks)
 st.download_button("Download Executive PDF", data=pdf_bytes, file_name="process_health_summary.pdf", mime="application/pdf")
 
-st.caption("Tip: brand this with company colors and plug it into a Sheet or API for live data.")
+st.caption("Developed by Amarjeet Khera")
