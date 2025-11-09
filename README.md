@@ -22,6 +22,8 @@ It answers critical questions every process manager or digitalization expert fac
 
 By applying simple but powerful statistical tools like z-score analysis, the app highlights abnormal process steps without requiring any machine learning model. It transforms process mining from a black-box exercise into something explainable, actionable, and aligned with continuous improvement practices such as Lean Six Sigma.
 
+Link to the Streamlit app: https://process-health-monitor-rntwvcc7xbjilpknjftafg.streamlit.app
+
 ## How to use it?
 
 The tool is designed to accept data in .csv format for now. For better results, make sure the data is organized into these columns below:
