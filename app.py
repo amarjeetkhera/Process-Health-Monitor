@@ -11,11 +11,11 @@ from phm.report import make_pdf_report
 
 st.set_page_config(page_title="Process Health Monitor", layout="wide")
 st.title("Process Health Monitor")
-st.caption("Analyze event logs, visualize your process, detect bottlenecks, and export an executive summary.")
+st.caption("Analyze event logs, visualize your process, detect bottlenecks and export an executive summary.")
 
 with st.sidebar:
     st.header("Data Input")
-    uploaded = st.file_uploader("Upload CSV (case_id, activity, timestamp[, resource, cost])", type=["csv"])
+    uploaded = st.file_uploader("Upload CSV", type=["csv"])
     st.markdown("Or generate a realistic demo dataset:")
     n_cases = st.slider("Demo cases", min_value=100, max_value=2000, value=600, step=50)
     seed = st.number_input("Seed", value=42, step=1)
