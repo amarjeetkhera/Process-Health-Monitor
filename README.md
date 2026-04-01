@@ -5,7 +5,7 @@ The Process Health Monitor (PHM) is an analytics tool designed to analyze event 
 The tool has been implemented with a Python backend and currently deployed with a Streamlit frontend for quick deployment and interactive exploration.
 
 ## Why it matters?
-In most organizations business processed evolve over time - people get added, steps multiply and what once worked efficiently starts showing cracks. Decisions on optimization are often made from gut feeling or anecdotal feedback rather than data. The PHM changes that by turning raw event logs into a clear, data-driven view of operational performance.
+In most organizations business processes evolve over time - people get added, steps multiply and what once worked efficiently starts showing cracks. Decisions on optimization are often made from gut feeling or anecdotal feedback rather than data. The PHM changes that by turning raw event logs into a clear, data-driven view of operational performance.
 
 It answers critical questions every process manager or digitalization expert faces:
 
